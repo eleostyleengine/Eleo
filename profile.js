@@ -8,9 +8,7 @@
  * - Specialization
  */
 
-const AIRTABLE_BASE_ID = 'appOYtF8CcKQIaSQe';
-const AIRTABLE_TABLE_NAME = 'REGISTRATION';
-const API_TOKEN = 'patBps6BJKfX61Pzj.ffe535bbdf6fba6eb201aed1df4127309cf29d2b290254daf657f1722bae475b';
+
 
 async function fetchProfile() {
     const params = new URLSearchParams(window.location.search);
@@ -18,10 +16,12 @@ async function fetchProfile() {
     if (!id) return;
 
     try {
-        const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}/${id}`, {
-            headers: { Authorization: `Bearer ${API_TOKEN}` }
-        });
+        // Fetch specific record from your secure function
+        const response = await fetch(`/.netlify/functions/airtable?id=${id}`);
         const data = await response.json();
+        const f = data.fields;
+        // ... rest of your code ...
+
         const f = data.fields;
 
         if(f) {

@@ -2,28 +2,26 @@
  * ELEO - Directory Controller with Real-Time Search
  */
 
-const AIRTABLE_BASE_ID = 'appOYtF8CcKQIaSQe'; 
-const AIRTABLE_TABLE_NAME = 'REGISTRATION'; 
-const API_TOKEN = 'pattdCO7FLrF5A6XF.102d579780db09094bdc53f2e2364be0138ccde7e95a7b773e98fc3bc33c69be';
+
 
 let allCreators = []; 
 let currentDisplayLimit = 6; // Limit for "See More"
 
 async function fetchCreators() {
     try {
-        const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`, {
-            headers: { Authorization: `Bearer ${API_TOKEN}` }
-        });
+        // We fetch all records through your secure function
+        const response = await fetch('/.netlify/functions/airtable?status=Approved');
         const data = await response.json();
         
         if (data.records) {
-            allCreators = data.records.filter(r => r.fields.Status === 'Approved');
+            allCreators = data.records; // Your backend now filters for 'Approved' automatically
             renderCreators(allCreators); 
         }
     } catch (e) {
         console.error("Fetch Error:", e);
     }
 }
+
 
 function renderCreators(creators) {
     const grid = document.getElementById('listings-grid');
@@ -96,3 +94,5 @@ document.getElementById('see-more-btn').addEventListener('click', () => {
 });
 
 document.addEventListener("DOMContentLoaded", fetchCreators);
+
+

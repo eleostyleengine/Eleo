@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Configuration
-    const AIRTABLE_BASE_ID = 'appOYtF8CcKQIaSQe';
-    const AIRTABLE_TABLE_NAME = 'REGISTRATION';
-    const API_TOKEN = 'pattdCO7FLrF5A6XF.102d579780db09094bdc53f2e2364be0138ccde7e95a7b773e98fc3bc33c69be';
+    
 
     const form = document.getElementById("registration-form");
 
@@ -32,14 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
             fields['Status'] = 'Pending';
 
             // Send to Airtable
-            const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${API_TOKEN}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ fields: fields, typecast: true })
-            });
+            // Send to your secure Netlify function
+const response = await fetch('/.netlify/functions/airtable', {
+    method: 'PUT', // We use PUT to signal a new registration
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: fields })
+});
+
 
             if (response.ok) {
                 alert("Registration successful! Your profile is now pending admin approval.");

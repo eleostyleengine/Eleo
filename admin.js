@@ -3,9 +3,7 @@
  * Manages status updates and table synchronization with Airtable
  */
 
-const AIRTABLE_BASE_ID = 'appOYtF8CcKQIaSQe'; 
-const AIRTABLE_TABLE_NAME = 'REGISTRATION'; 
-const API_TOKEN = 'pattdCO7FLrF5A6XF.102d579780db09094bdc53f2e2364be0138ccde7e95a7b773e98fc3bc33c69be';
+
 
 // --- Initialization ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,8 +17,8 @@ async function refreshAllData() {
 
 // --- Fetch Pending Creators (Status = Pending) ---
 async function fetchPendingCreators() {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}?filterByFormula={Status}='Pending'`;
-    const response = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+    const response = await fetch('/.netlify/functions/airtable?status=Pending');
+
     const data = await response.json();
     
     const tbody = document.getElementById('applicationRows');
@@ -56,8 +54,8 @@ async function fetchPendingCreators() {
 
 // --- Fetch Approved Creators (Status = Approved) ---
 async function fetchApprovedCreators() {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}?filterByFormula={Status}='Approved'`;
-    const response = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+    const response = await fetch('/.netlify/functions/airtable?status=Approved');
+
     const data = await response.json();
     
     const tbody = document.getElementById('activeRegistryRows');
@@ -88,16 +86,11 @@ async function fetchApprovedCreators() {
 
 // --- Update Airtable Status ---
 async function approveCreator(recordId) {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}/${recordId}`;
-    
-    await fetch(url, {
-        method: 'PATCH',
-        headers: { 
-            Authorization: `Bearer ${API_TOKEN}`,
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({ fields: { Status: 'Approved' } })
-    });
+    await fetch('/.netlify/functions/airtable', {
+    method: 'POST',
+    body: JSON.stringify({ recordId })
+});
+
 
     // Refresh tables after update
     refreshAllData();
