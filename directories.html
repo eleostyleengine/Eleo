@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Fashion Creators | Eleo</title>
+    <style>
+        /* --- CSS RESET & SYSTEM FOUNDATIONS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --surface-card: #252525;
+            --primary-gold: #D4AF37;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1920&auto=format&fit=crop') center/cover;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-banner p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- FORM ELEMENTS & BUTTONS --- */
+        .search-wrapper {
+            background-color: #0a0a0a;
+            padding: 40px 0;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 15px;
+            align-items: center;
+        }
+
+        @media (max-width: 800px) {
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .search-box h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-gold);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: #000000;
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+            box-shadow: 0 0 0 2px var(--primary-gold) inset;
+        }
+
+        /* --- CREATOR LISTINGS GRID --- */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .listings-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .listings-grid { grid-template-columns: 1fr; }
+        }
+
+        .creator-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .creator-header h3 {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .location-tag {
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .specialties-box {
+            margin-bottom: 20px;
+        }
+
+        .specialties-box h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888888;
+            margin-bottom: 8px;
+        }
+
+        .specialties-list {
+            list-style: none;
+        }
+
+        .specialties-list li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .specialties-list li::before {
+            content: '•';
+            color: var(--primary-gold);
+            position: absolute;
+            left: 0;
+        }
+
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #4CAF50;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .see-more-wrapper {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="abouteleo.html">About</a>
+                <a href="directories.html" style="color: var(--primary-gold);">Find Tailors</a>
+                <a href="faq.html">FAQ</a>
+                <a href="join.html">JoinUs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-banner">
+        <div class="container">
+            <h1>Find Fashion Creators</h1>
+            <p>Discover talented tailors, designers, dressmakers, and fashion creators near you.
+            Search by Specialization, location or name.</p>
+        </div>
+    </div>
+
+    <div class="search-wrapper">
+        <div class="container">
+            <div class="search-grid">
+                <div class="search-box">
+                    <h3>Name</h3>
+                    <input type="text" id="search-name" class="search-input" placeholder="Enter creator name...">
+                </div>
+                <div class="search-box">
+                    <h3>Specialization</h3>
+                    <input type="text" id="search-specialization" class="search-input" placeholder="e.g., Bridal, Suits...">
+                </div>
+                <div class="search-box">
+                    <h3>Location</h3>
+                    <input type="text" id="search-location" class="search-input" placeholder="Enter city or state...">
+                </div>
+                <div class="search-box" style="margin-top: auto;">
+                    <button id="search-btn" class="btn btn-gold" style="width: 100%;">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <h2>Creator Listings</h2>
+            <div class="listings-grid" id="listings-grid">
+                </div>
+
+            <div class="see-more-wrapper">
+                <button id="see-more-btn" class="btn btn-gold">See More Creators</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="text-align: center; color: #555555; text-transform: uppercase; font-size: 0.85rem;">
+                &copy; 2026 Eleo — Built to connect talent with opportunity.
+                <a href="contact.html" style="color: var(--primary-gold); text-decoration: underline; text-transform: uppercase; letter-spacing: 0.5px;">Contact Support</a>
+            </p>
+        </div>
+        
+         <p>
+         <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+    </p>
+    </footer>
+
+    <script src="directories.js"></script>
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-CZIEBKMP.js" defer></script>
+</body>
+</html>

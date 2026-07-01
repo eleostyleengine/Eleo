@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Eleo | Connecting Talent with Opportunity</title>
+    <style>
+        /* --- CSS RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-gold: #D4AF37;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- TYPOGRAPHY & HEADER ALIGNMENT --- */
+        h1, h2, h3 {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-gold);
+            margin: 15px auto 40px auto;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- HERO HEADER --- */
+        .about-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .about-hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* --- WHY WE STARTED (SPLIT LAYOUT) --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .split-layout { grid-template-columns: 1fr; }
+        }
+
+        /* DYNAMIC 3D POP-OUT IMAGE CONTAINER */
+        .why-started-image {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=800&auto=format&fit=crop') center/cover no-repeat;
+            height: 300px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            
+            /* Enhanced duration to make the movement rich and smooth */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.22, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* HIGH-INTENSITY HOVER PHYSICS */
+        .why-started-image:hover {
+            transform: scale(1.15) translateY(-20px); /* Massive zoom and extreme lift */
+            border-color: var(--primary-gold);
+            /* Massive, deep 3D darkness shadow paired with an intense ambient gold glow */
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.8), 0 15px 40px rgba(212, 175, 55, 0.4);
+            z-index: 10; /* Ensures it leaps over any surrounding boundaries */
+        }
+
+        /* --- MISSION & VISION (CARDS) --- */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .mv-grid { grid-template-columns: 1fr; }
+        }
+
+        .mv-card {
+            background-color: var(--surface-color);
+            padding: 40px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .mv-card h3 {
+            color: var(--primary-gold);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- VALUES GRID --- */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .value-card {
+            background-color: var(--surface-color);
+            padding: 30px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .value-card:hover {
+            border-color: var(--primary-gold);
+        }
+
+        .value-card h3 {
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* --- WHO CAN JOIN --- */
+        .join-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .join-list li {
+            background-color: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 4px;
+            border-right: 2px solid var(--primary-gold);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* --- LOOKING AHEAD --- */
+        .center-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- FOUNDER'S NOTE MODULE --- */
+        .founder-note-section {
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 80px 0;
+        }
+
+        .founder-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .founder-signature-block {
+            margin-top: 30px;
+            border-top: 1px solid #333333;
+            padding-top: 20px;
+        }
+
+        .founder-name {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .founder-title {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="abouteleo.html" style="color: var(--primary-gold);">About</a>
+                
+                <a href="directories.html">Find Tailors</a>
+                
+                <a href="faq.html">FAQ</a>
+                <a href="join.html">Join Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <section>
+        <div class="container about-hero">
+            <h1>About Eleo</h1>
+            <p class="subtitle">Connecting Talent with Opportunity</p>
+            <p>Eleo is a platform dedicated to helping talented fashion creators become more visible and accessible to customers. We believe that skill deserves recognition and that talented creators should have opportunities to showcase their work beyond their immediate communities.</p>
+            <p>Whether you're looking for a tailor, dressmaker, designer, or fashion creator, Eleo helps you discover and connect with the right people.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container split-layout">
+            <div>
+                <h2 style="text-align: left; margin-bottom: 10px;">Why We Started</h2>
+                <div style="width: 50px; height: 3px; background-color: var(--primary-gold); margin-bottom: 30px;"></div>
+                <p>Many talented fashion creators produce excellent work but struggle to reach new customers.</p>
+                <p>At the same time, customers often find it difficult to discover skilled creators they can trust.</p>
+                <p>Eleo was created to bridge this gap. Our goal is to make fashion talent easier to find, easier to showcase, and easier to support.</p>
+            </div>
+            <div class="why-started-image"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Our Mission</h3>
+                    <p style="margin-bottom: 0;">To create a platform where fashion creators can showcase their skills, grow their businesses, and connect with customers who value quality craftsmanship.</p>
+                </div>
+                <div class="mv-card">
+                    <h3>Our Vision</h3>
+                    <p style="margin-bottom: 0;">To become a trusted fashion discovery platform that empowers creators and connects communities through fashion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">What We Value</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Visibility</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 0;">Every creator deserves the opportunity to be seen.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Opportunity</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 0;">Talent should not be limited by location or lack of exposure.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Community</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 0;">Fashion creators and customers grow stronger when connected.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Growth</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 0;">We support creators in building sustainable businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Who Can Join Eleo?</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 20px auto;">Eleo welcomes diverse professionals across the fashion industry landscape:</p>
+            <ul class="join-list">
+                <li>Tailors</li>
+                <li>Fashion designers</li>
+                <li>Dressmakers</li>
+                <li>Bespoke clothing creators</li>
+                <li>Fashion entrepreneurs</li>
+                <li>Emerging fashion brands</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <div class="container center-text">
+            <h2 class="section-title">Looking Ahead</h2>
+            <p>This is only the beginning.</p>
+            <p>As Eleo grows, we aim to provide more opportunities for creators to showcase their work, reach customers, and build successful businesses.</p>
+        </div>
+    </section>
+
+    <section class="founder-note-section">
+        <div class="container founder-wrapper">
+            <h2 class="section-title">Founder's Note</h2>
+            <p>Eleo began with a simple belief: talent deserves visibility.</p>
+            <p>Across our communities are skilled tailors, designers, and fashion creators whose work speaks for itself, yet many remain difficult to discover. At the same time, customers often struggle to find creators whose craftsmanship, style, and vision match what they are looking for.</p>
+            <p>Eleo was created to bridge that gap.</p>
+            <p>This platform is more than a directory; it is a step toward making creativity easier to find, support, and celebrate. We believe that every creator deserves an opportunity to be seen, and every customer deserves access to exceptional craftsmanship.</p>
+            <p>Though Eleo is still growing, the vision remains clear: to build a trusted space where talent meets opportunity.</p>
+            <p>Thank you for being part of the journey.</p>
+            
+            <div class="founder-signature-block">
+                <div class="founder-name">— Farida Akus</div>
+                <div class="founder-title">Founder, Eleo</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-quote">"Helping fashion creators move from hidden talent to recognized craftsmanship."</p>
+            <p class="footer-copyright" style="margin-bottom: 10px;">
+                &copy; 2026 Eleo. Built to connect talent with opportunity.
+            </p>
+            <p class="footer-copyright" style="font-size: 0.8rem;">
+                Need assistance? <a href="contact.html" style="color: var(--primary-gold); text-decoration: underline; text-transform: uppercase; letter-spacing: 0.5px;">Contact Support</a>
+            </p>
+        </div>
+        
+                <p>
+         <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+    </p>
+    </footer>
+    <script src="abouteleo.js"></script>
+ <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-CZIEBKMP.js" defer></script>
+    
+
+</body>
+</html>

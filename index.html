@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleo | Discover Talented Fashion Creators</title>
+    
+    <!-- NATIVE BOTPRESS WEBCHAT SCRIPTS -->
+    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-T503DJQ7.js" defer></script>
+
+    <style>
+        /* --- CSS RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-gold: #D4AF37;
+            --secondary-gold: #AA882C;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+            /* Prevents horizontal layout shifts during 3D tilts */
+            overflow-x: hidden; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-gold);
+            margin: 15px auto 40px auto;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: #000000;
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-gold);
+            color: #000000;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span {
+            color: var(--primary-gold);
+        }
+
+        .hero .subheadline {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.3rem;
+        }
+
+        /* --- WHAT IS ELEO SECTION --- */
+        .intro-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro-section em {
+            color: var(--primary-gold);
+            font-style: normal;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* --- WHY ELEO SECTION --- */
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .why-grid { grid-template-columns: 1fr; }
+        }
+
+        .why-box {
+            background-color: var(--surface-color);
+            padding: 40px;
+            border-radius: 6px;
+            border-top: 3px solid var(--primary-gold);
+        }
+
+        .why-box h3 {
+            color: var(--primary-gold);
+            font-size: 1.6rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .why-box ul {
+            list-style: none;
+        }
+
+        .why-box ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+        }
+
+        .why-box ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        /* --- FEATURED CREATORS --- */
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .creator-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+        }
+
+        .creator-img-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, #121212, #2a2a2a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .creator-img-placeholder::after {
+            content: 'Eleo Creator';
+            color: rgba(212, 175, 55, 0.3);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .creator-info {
+            padding: 25px;
+        }
+
+        .creator-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .creator-info p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* --- HOW IT WORKS --- */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 46px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- VISION & COMMUNITY --- */
+        .center-cta {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- JAVASCRIPT TARGET ANIMATIONS --- */
+        .reveal-active {
+            opacity: 1 !important;
+            transform: translateZ(0) rotateX(0deg) translateY(0) !important;
+        }
+        
+  
+
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="index.html" style="color: var(--primary-gold);">Home</a>
+                <a href="abouteleo.html">About</a>
+              
+                <a href="directories.html">Find Tailors</a>
+                <a href="faq.html">FAQ</a>
+                <a href="join.html">JoinUs</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Discover Talented <span>Fashion Creators</span> Near You</h1>
+            <p class="subheadline">Eleo connects customers with skilled tailors, fashion designers, and clothing creators, making it easier to find the right person for your next outfit.</p>
+            <div class="btn-group">
+                <a href="directories.html" class="btn btn-gold">Find Tailors</a>
+                <a href="join.html" class="btn btn-outline">Join Eleo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT IS ELEO SECTION -->
+    <section>
+        <div class="container intro-section">
+            <h2 class="section-title">What is Eleo?</h2>
+            <em>Fashion is personal. Finding the right creator shouldn't be difficult.</em>
+            <p>Eleo was created to help people discover talented fashion creators and connect directly with them. Whether you're looking for a tailor, a dressmaker, or a designer, Eleo makes local talent easier to find and support.</p>
+        </div>
+    </section>
+
+    <!-- WHY ELEO SECTION -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why Eleo?</h2>
+            <div class="why-grid">
+                <div class="why-box">
+                    <h3>We help customers</h3>
+                    <ul>
+                        <li>Discover skilled creators</li>
+                        <li>View their work</li>
+                        <li>Connect directly with them</li>
+                        <li>Support local talent</li>
+                    </ul>
+                </div>
+                <div class="why-box">
+                    <h3> We help creators</h3>
+                    <ul>
+                        <li>Increase visibility</li>
+                        <li>Showcase their skills</li>
+                        <li>Reach new customers</li>
+                        <li>Grow their businesses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED CREATORS SECTION -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Featured Creators</h2>
+            <div class="creators-grid">
+                <!-- Creator 1 -->
+                <div class="creator-card" data-creator-id="amina">
+                    <div class="creator-img-placeholder"></div>
+                    <div class="creator-info">
+                        <h3>Amina Fashion House</h3>
+                        <p>Women's wear, gowns, and custom designs.</p>
+                    </div>
+                </div>
+                <!-- Creator 2 -->
+                <div class="creator-card" data-creator-id="umar">
+                    <div class="creator-img-placeholder"></div>
+                    <div class="creator-info">
+                        <h3>Umar Tailoring Studio</h3>
+                        <p>Traditional and modern men's wear.</p>
+                    </div>
+                </div>
+                <!-- Creator 3 -->
+                <div class="creator-card" data-creator-id="grace">
+                    <div class="creator-img-placeholder"></div>
+                    <div class="creator-info">
+                        <h3>Grace Stitches</h3>
+                        <p>School uniforms and everyday clothing.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <a href="directories.html" class="btn btn-outline">View All Creators</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Search</h3>
+                    <p>Browse fashion creators and tailors.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Explore</h3>
+                    <p>View their specialties and sample work.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Connect</h3>
+                    <p>Reach out directly and discuss your needs.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Create</h3>
+                    <p>Bring your fashion ideas to life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR VISION SECTION -->
+    <section>
+        <div class="container center-cta">
+            <h2 class="section-title">Our Vision</h2>
+            <p>To become a trusted platform where fashion creators can showcase their skills and where customers can easily discover quality craftsmanship.</p>
+        </div>
+    </section>
+
+    <!-- JOIN COMMUNITY SECTION -->
+    <section>
+        <div class="container center-cta">
+            <h2 class="section-title">Join the Eleo Community</h2>
+            <p>Are you a tailor, designer, or fashion creator? Let more people discover your work.</p>
+            <div class="btn-group">
+                <a href="join.html" class="btn btn-gold">Join Eleo Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="footer-quote">"Every stitch tells a story. Every creator deserves to be seen."</p>
+            <p class="footer-copyright">
+                <a href="admin-login.html" style="color: inherit; text-decoration: none; cursor: default;">&copy;</a> 2026 Eleo. Need assistance? <a href="contact.html" style="color: var(--primary-gold); text-decoration: underline;">Contact Support</a>
+            </p>
+        </div>
+          <p>
+         <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+    </p>
+    </footer>
+
+    <!-- LINK HOMEPAGE JAVASCRIPT AS ARCHITECTED -->
+    <script src="index.js"></script>
+    
+    
+       <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-CZIEBKMP.js" defer></script>
+
+    
+
+
+
+</body>
+</html>

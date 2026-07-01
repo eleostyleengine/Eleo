@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support | Eleo</title>
+    <style>
+        /* --- CSS RESET & SYSTEM FOUNDATIONS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-gold: #D4AF37;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- CONTACT WORKSPACE LAYOUT --- */
+        .contact-header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- FORM INFRASTRUCTURE --- */
+        .contact-form-wrapper {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: #121212;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .char-counter {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: #000000;
+        }
+
+        /* --- SUPPORT INFO SIDEBAR --- */
+        .support-info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        footer {
+            background-color: #050505;
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="profile.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="profile.html">Home</a>
+                <a href="abouteleo.html">About</a>
+                <a href="directories.html">Find Tailors</a>
+                <a href="faq.html">FAQ</a>
+                <a href="join.html">Join Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="contact-header">
+            <h1>Contact Support</h1>
+            <p style="color: var(--text-muted);">Have questions or concerns? Reach out for complaints, disputes, or platform assistance.</p>
+        </div>
+
+        <div class="contact-layout">
+            <div class="contact-form-wrapper">
+                <form id="support-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter active email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Please provide details regarding complaints, disputes, reports, or platform issues." required></textarea>
+                        <span id="counter" class="char-counter">0 characters</span>
+                    </div>
+                    
+                    <!-- Updated Button -->
+                    <button type="button" class="btn btn-gold" style="margin-bottom: 20px;" onclick="alert('Please copy the email address below to send your inquiry.')">
+                        Submit Inquiry
+                    </button>
+
+                    <!-- New Email Copy Section -->
+                    <div style="background-color: #121212; border: 1px dashed #D4AF37; padding: 15px; border-radius: 4px; text-align: center;">
+                        <p style="color: #CCCCCC; font-size: 0.8rem; margin-bottom: 5px;">Prefer to email us directly?</p>
+                        <code id="email-text" style="color: #D4AF37; font-size: 1.1rem; cursor: pointer;" onclick="copyEmail()">eleosupport@gmail.com</code>
+                        <p id="copy-status" style="font-size: 0.7rem; color: #555; margin-top: 5px;"></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="support-info-panel">
+                <div class="info-card">
+                    <h3>Direct Channels</h3>
+                    <p>For complaints, please include the tailor's name, phone, and email in your email.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Eleo — Built to connect talent with opportunity.</p>
+        </div>
+        
+         <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+    </footer>
+    <script src="contact.js"></script>
+</body>
+</html>

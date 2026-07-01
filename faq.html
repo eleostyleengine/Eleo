@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Eleo</title>
+    <style>
+        /* --- CSS RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-gold: #D4AF37;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 20px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        /* --- TWO COLUMN DESKTOP GRID --- */
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .faq-layout { grid-template-columns: 1fr; gap: 30px; }
+        }
+
+        /* --- LEFT SIDEBAR INFO CARD --- */
+        .faq-sidebar {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+        }
+
+        .faq-sidebar h3 {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq-sidebar p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* --- RIGHT COLUMN: QUESTION BLOCKS --- */
+        .faq-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 25px;
+            transition: border-color 0.3s ease;
+        }
+
+        .faq-card:hover {
+            border-color: var(--primary-gold);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: #000000;
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+            box-shadow: 0 0 0 2px var(--primary-gold) inset;
+        }
+
+        /* --- CLOSING FOOTNOTE BANNER --- */
+        .closing-banner {
+            text-align: center;
+            background-color: #161616;
+            padding: 40px 20px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            margin-top: 20px;
+        }
+
+        .closing-banner p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="abouteleo.html">About</a>
+                
+                <a href="directories.html">Find Tailors</a>
+                <a href="faq.html" style="color: var(--primary-gold);">FAQ</a>
+                <a href="join.html">JoinUs</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Frequently Asked Questions</h1>
+            <p>Clear details explaining how the Eleo network supports fashion creators and connects them with potential customers.</p>
+        </div>
+    </div>
+
+    <!-- MAIN FAQ SYSTEM AREA -->
+    <div class="container">
+        <section class="faq-layout">
+            
+            <!-- LEFT COLUMN: SIDEBAR -->
+            <div class="faq-sidebar">
+                <h3>Ecosystem Insights</h3>
+                <p>Can't find the answer you need here? Our support team is ready to assist you directly with platform inquiries.</p>
+                <a href="contact.html" class="btn btn-gold" style="width: 100%;">Contact Support</a>
+            </div>
+
+            <!-- RIGHT COLUMN: QUESTIONS STACK -->
+            <div class="faq-stack">
+                
+                <!-- Q1 -->
+                <div class="faq-card">
+                    <div class="faq-question">What is Eleo?</div>
+                    <div class="faq-answer">Eleo is a platform that helps people discover fashion creators such as tailors, designers, and dressmakers. It connects customers with skilled creators in their local area.</div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="faq-card">
+                    <div class="faq-question">Is Eleo free to use?</div>
+                    <div class="faq-answer">Yes. Eleo is free for customers to browse creators. Creators may also join for free in this initial version.</div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="faq-card">
+                    <div class="faq-question">How do I find a tailor on Eleo?</div>
+                    <div class="faq-answer">Go to the “Find Creators” page, browse the listings, and click on any creator to view their profile and contact them.</div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="faq-card">
+                    <div class="faq-question">How do I contact a creator?</div>
+                    <div class="faq-answer">Each creator profile includes contact details such as phone number or WhatsApp for direct communication.</div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="faq-card">
+                    <div class="faq-question">Can I join Eleo as a tailor or designer?</div>
+                    <div class="faq-answer">Yes. Creators can join Eleo by filling out the “Join Eleo” form. Once submitted, they will be added to the platform listing.</div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="faq-card">
+                    <div class="faq-question">Can creators update their information later?</div>
+                    <div class="faq-answer">In the current version, updates are not yet automated. This feature will be added in future updates.</div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="faq-card">
+                    <div class="faq-question">Does Eleo handle payments?</div>
+                    <div class="faq-answer">No. Eleo does not handle payments at this stage. Customers communicate and transact directly with creators.</div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="faq-card">
+                    <div class="faq-question">Is Eleo available everywhere?</div>
+                    <div class="faq-answer">Eleo starts locally and will gradually expand to more regions over time.</div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="faq-card">
+                    <div class="faq-question">How do I report a problem?</div>
+                    <div class="faq-answer">You can contact Eleo through the Contact page if you experience any issue with a creator or the platform configuration.</div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="faq-card">
+                    <div class="faq-question">What kind of creators can join Eleo?</div>
+                    <div class="faq-answer">Tailors, fashion designers, dressmaker houses, embroidery specialists, and other verified fashion-related artisanal creators.</div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="faq-card">
+                    <div class="faq-question">Will Eleo add more features in the future?</div>
+                    <div class="faq-answer">Yes. Eleo will grow into a more advanced platform with search filters, automated creator accounts, and enhanced discovery tools for creators and customers.</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CLOSING SECTION FOOTNOTE -->
+        <div class="closing-banner">
+            <p>Eleo is still growing. Thank you for being part of its early journey.</p>
+        </div>
+    </div>
+
+    <!-- GLOBAL SYNCHRONIZED FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="footer-quote">"Helping fashion creators move from hidden talent to recognized craftsmanship."</p>
+            <p class="footer-copyright" style="margin-bottom: 10px;">
+                &copy; 2026 Eleo. Built to connect talent with opportunity.
+            </p>
+            <p class="footer-copyright" style="font-size: 0.8rem;">
+                Need assistance? <a href="contact.html" style="color: var(--primary-gold); text-decoration: underline; text-transform: uppercase; letter-spacing: 0.5px;">Contact Support</a>
+            </p>
+        </div>
+        <p>
+         <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+    </p>
+    </footer>
+<script src="faq.js"></script>
+
+<script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-CZIEBKMP.js" defer></script>
+</body>
+</html>

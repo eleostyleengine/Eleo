@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Eleo Community | Registration</title>
+    <style>
+        /* --- CSS RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-gold: #D4AF37;
+            --text-light: #FFFFFF;
+            --text-muted: #CCCCCC;
+            --border-color: #333333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        header {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            text-align: center;
+            padding: 60px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        /* --- WHY JOIN ECOSYSTEM --- */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .why-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .why-card h3 {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- REGISTRATION FORM INTERFACE --- */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 25px;
+        }
+
+        .form-section:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .form-section h2 {
+            font-size: 1.4rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .input-field {
+            background-color: #121212;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+            width: 100%;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary-gold);
+        }
+
+        /* --- CHECKBOX / CHIPS MULTI-SELECT --- */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #121212;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"],
+        .agreement-block input[type="checkbox"] {
+            accent-color: var(--primary-gold);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* --- AGREEMENT SYSTEM --- */
+        .agreement-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .agreement-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: #000000;
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--primary-gold);
+            box-shadow: 0 0 0 2px var(--primary-gold) inset;
+        }
+
+        /* --- FOUNDER NOTE & CLOSING STATEMENTS --- */
+        .founder-note {
+            background-color: #161616;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .founder-note blockquote {
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--primary-gold);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEO</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="abouteleo.html">About</a>
+                            
+                <a href="directories.html">Find Tailors</a>
+                <a href="faq.html">FAQ</a>
+                <a href="join.html" style="color: var(--primary-gold);">Join Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Become Part of the Eleo Community</h1>
+            <p>Join a growing network of fashion creators and make your work easier to discover. Whether you're a tailor, fashion designer, dressmaker, or fashion entrepreneur, Eleo is built to help you showcase your talent.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="why-grid">
+            <div class="why-card">
+                <h3>Reach More Customers</h3>
+                <p>Showcase your work to people looking for fashion creators.</p>
+            </div>
+            <div class="why-card">
+                <h3>Build Your Presence</h3>
+                <p>Create a professional profile that represents your brand.</p>
+            </div>
+            <div class="why-card">
+                <h3>Grow Your Business</h3>
+                <p>Connect directly with potential customers.</p>
+            </div>
+            <div class="why-card">
+                <h3>Be Part of a Community</h3>
+                <p>Join other creators who are passionate about fashion and craftsmanship.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <form id="registration-form">
+                
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" class="input-field" name="Full Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Business Name (Optional)</label>
+                            <input type="text" class="input-field" name="Business Name"> 
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="input-field" name="Phone Number" required>
+                        </div>
+                        <div class="input-group">
+                            <label>WhatsApp Number</label>
+                            <p> Use format +2348012345678 </p>
+                            <input type="tel" class="input-field" name="WhatsApp Number" required>
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-top: 20px;">
+                        <label>Email Address</label>
+                        <input type="email" class="input-field" name="Email Address" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Location Information</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Country</label>
+                            <input type="text" class="input-field" name="Country" required>
+                        </div>
+                        <div class="input-group">
+                            <label>State</label>
+                            <input type="text" class="input-field" name="State" required>
+                        </div>
+                        <div class="input-group">
+                            <label>City</label>
+                            <input type="text" class="input-field" name="City" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Area / Town</label>
+                            <input type="text" class="input-field" name="Area/Town" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Professional Information</h2>
+                    <div class="form-grid" style="margin-bottom: 20px;">
+                        <div class="input-group">
+                            <label>What best describes you?</label>
+                            <select class="input-field" name="What best describes you?" style="background-color: #121212;">
+                                <option>Tailor</option>
+                                <option>Fashion Designer</option>
+                                <option>Dressmaker</option>
+                                <option>Fashion Brand</option>
+                                <option>Embroidery Specialist</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Years of Experience</label>
+                            <input type="number" class="input-field" name="Years of experience" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-bottom: 25px;">
+                        <label style="margin-bottom: 5px;">Specialization (Select all that apply)</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Men's Wear"> Men's Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Women's Wear"> Women's Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Children's Wear"> Children's Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Traditional Wear"> Traditional Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Bridal Wear"> Bridal Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="School Uniforms"> School Uniforms</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Corporate Wear"> Corporate Wear</label>
+                            <label class="checkbox-item"><input type="checkbox" name="Specialization" value="Custom Designs"> Custom Designs</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>About Your Business</label>
+                        <textarea class="input-field" name="About your business" rows="4" placeholder="Tell customers about your work..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Social Media</h2>
+                    <p id="social-instruction" style="font-size: 0.9rem; color: var(--primary-gold); margin-bottom: 15px;">Include at least one social media profile showing your work.</p>
+                    <div class="form-grid" id="social-fields-container">
+                        <div class="input-group">
+                            <label>Facebook</label>
+                            <input type="text" class="input-field social-input" name="Facebook" placeholder="https://...">
+                        </div>
+                        <div class="input-group">
+                            <label>Instagram</label>
+                            <input type="text" class="input-field social-input" name="Instagram" placeholder="@username">
+                        </div>
+                        <div class="input-group">
+                            <label>TikTok</label>
+                            <input type="text" class="input-field social-input" name="TikTok" placeholder="@username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="agreement-block">
+                    <label class="agreement-row">
+                        <input type="checkbox" required>
+                        <span>I confirm that the information provided is accurate.</span>
+                    </label>
+                    <label class="agreement-row">
+                        <input type="checkbox" required>
+                        <span>I agree to be listed on Eleo.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-gold" style="width: 100%;">Join Eleo</button>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="founder-note">
+        <div class="container">
+            <blockquote>"We believe talent deserves visibility. Eleo was created to help fashion creators showcase their work and connect with people who appreciate quality craftsmanship."</blockquote>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="footer-quote">"Helping fashion creators move from hidden talent to recognized craftsmanship."</p>
+            <p class="footer-copyright" style="margin-bottom: 10px;">
+                &copy; 2026 Eleo. Built to connect talent with opportunity.
+            </p>
+            <p class="footer-copyright" style="font-size: 0.8rem;">
+                Need assistance? <a href="contact.html" style="color: var(--primary-gold); text-decoration: underline; text-transform: uppercase; letter-spacing: 0.5px;">Contact Support</a>
+            </p>
+            <p>
+                <a href="legal.html" style="color: #D4AF37; text-decoration: none;">Terms of Service & Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="join.js"></script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2026/02/12/18/20260212185300-CZIEBKMP.js" defer></script>
+
+</body>
+</html>

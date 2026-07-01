@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleo HQ | Main Admin Office</title>
+    <script>
+        if (sessionStorage.getItem("eleoAdminAuthenticated") !== "true") {
+            alert("Access Denied.");
+            window.location.href = "admin-login.html";
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        :root {
+            --bg-color: #121212; --surface-color: #1E1E1E; --primary-gold: #D4AF37;
+            --secondary-gold: #AA882C; --text-light: #FFFFFF; --text-muted: #CCCCCC;
+            --border-color: #333333; --action-green: #2ecc71; --action-blue: #3498db; --action-red: #ff4d4d;
+        }
+        body { background-color: var(--bg-color); color: var(--text-light); line-height: 1.6; display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background-color: #0a0a0a; border-right: 1px solid var(--border-color); padding: 30px 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        .sidebar-brand { color: var(--primary-gold); font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+        .sidebar-tag { font-size: 0.85rem; color: var(--primary-gold); font-weight: 600; margin-bottom: 40px; display: inline-block; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; width: 100%; }
+        .admin-nav { list-style: none; flex-grow: 1; }
+        .nav-link { display: block; color: var(--text-muted); text-decoration: none; padding: 12px 15px; border-radius: 4px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s; }
+        .nav-link.active, .nav-link:hover { background-color: var(--surface-color); color: var(--primary-gold); border-left: 3px solid var(--primary-gold); }
+        .btn-exit { background-color: transparent; color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.3); padding: 12px; border-radius: 4px; cursor: pointer; font-weight: 600; text-transform: uppercase; transition: all 0.3s; }
+        .btn-exit:hover { background-color: #ff4d4d; color: #fff; }
+        .console-main { flex-grow: 1; padding: 40px; overflow-y: auto; width: 100%; }
+        .console-header { margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .console-header h1 { font-size: 2rem; color: var(--primary-gold); }
+        .room-workspace { display: none; }
+        .room-workspace.active-room { display: block; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .metric-card { background-color: var(--surface-color); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; }
+        .metric-card h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; }
+        .metric-card .number { font-size: 2rem; font-weight: bold; color: var(--primary-gold); }
+        .table-panel { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 6px; padding: 25px; overflow-x: auto; }
+        .table-title { font-size: 1.2rem; color: var(--text-light); margin-bottom: 15px; }
+        .creator-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1000px; }
+        .creator-table th { color: var(--primary-gold); font-size: 0.85rem; text-transform: uppercase; padding: 12px 15px; border-bottom: 2px solid var(--border-color); }
+        .creator-table td { padding: 14px 15px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.95rem; }
+        .action-cluster { display: flex; gap: 8px; }
+        .action-btn { padding: 6px 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid transparent; border-radius: 4px; cursor: pointer; }
+        .btn-verify { color: var(--action-green); border-color: var(--action-green); background: transparent; }
+        .btn-verify:hover { background: var(--action-green); color: #000; }
+        .btn-deny { color: var(--action-red); border-color: var(--action-red); background: transparent; }
+        .btn-deny:hover { background: var(--action-red); color: #fff; }
+        .btn-email { color: var(--action-blue); border-color: var(--action-blue); background: transparent; }
+        .btn-email:hover { background: var(--action-blue); color: #fff; }
+        .btn-lock { color: var(--secondary-gold); border-color: var(--secondary-gold); background: transparent; }
+        .btn-lock:hover { background: var(--secondary-gold); color: #000; }
+        .social-feed-link { color: var(--primary-gold); text-decoration: none; font-size: 0.85rem; display: inline-block; background: rgba(214, 175, 55, 0.08); padding: 2px 6px; border: 1px solid rgba(214, 175, 55, 0.2); border-radius: 4px; }
+        .social-empty { color: #555555; font-weight: bold; }
+        .badge-live { color: var(--action-green); background: rgba(46, 204, 113, 0.1); padding: 3px 6px; border-radius: 4px; border: 1px solid var(--action-green); }
+        .badge-suspended { color: var(--action-red); background: rgba(255, 77, 77, 0.1); padding: 3px 6px; border-radius: 4px; border: 1px solid var(--action-red); }
+        @media (max-width: 820px) { body { flex-direction: column; } .sidebar { width: 100%; } .admin-nav { display: flex; gap: 10px; } }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">ELEO HQ</div>
+            <span class="sidebar-tag">Admin - Farida Akus</span>
+            <ul class="admin-nav">
+                <li><a id="tab-audits" class="nav-link active" onclick="toggleSystemRoom('audits-room')">Pending Audits</a></li>
+                <li><a id="tab-status" class="nav-link" onclick="toggleSystemRoom('ecosystem-room')">Ecosystem Status</a></li>
+            </ul>
+        </div>
+        <button class="btn-exit" id="logoutBtn">Lock Office</button>
+    </aside>
+
+    <main class="console-main">
+        <div id="audits-room" class="room-workspace active-room">
+            <header class="console-header"><h1>Pending Registrations</h1></header>
+            <section class="metrics-grid">
+                <div class="metric-card"><h3>Queue Items</h3><div class="number" id="queueTotal">0</div></div>
+            </section>
+            <div class="table-panel">
+                <h2 class="table-title">Awaiting Approval</h2>
+                <table class="creator-table">
+                    <thead>
+                        <tr>
+                            <th>Artisan Name</th>
+                            <th>Fashion Focus</th>
+                            <th>Email</th>
+                            <th>Instagram</th>
+                            <th>X (Twitter)</th>
+                            <th>TikTok</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationRows"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="ecosystem-room" class="room-workspace">
+            <header class="console-header"><h1>Active Tailors Registry</h1></header>
+            <section class="metrics-grid">
+                <div class="metric-card"><h3>Active Network</h3><div class="number" id="activeNetworkTotal">0</div></div>
+            </section>
+            <div class="table-panel">
+                <h2 class="table-title">Live Directory Operations</h2>
+                <table class="creator-table">
+                    <thead>
+                        <tr><th>Active Artisan</th><th>Location</th><th>Views</th><th>Orders</th><th>Status</th><th>Override</th></tr>
+                    </thead>
+                    <tbody id="activeRegistryRows"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleSystemRoom(targetRoomId) {
+            document.querySelectorAll('.room-workspace').forEach(r => r.classList.remove('active-room'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(targetRoomId).classList.add('active-room');
+            if (targetRoomId === 'audits-room') {
+                document.getElementById('tab-audits').classList.add('active');
+            } else {
+                document.getElementById('tab-status').classList.add('active');
+            }
+        }
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            sessionStorage.removeItem("eleoAdminAuthenticated");
+            window.location.href = "admin-login.html";
+        });
+    </script>
+    <script src="admin.js"></script>
+</body>
+</html>
