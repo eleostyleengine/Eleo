@@ -1,3 +1,29 @@
+function formatSocialLink(platform, value) {
+    if (!value || value.trim() === '') return null;
+
+    const val = value.trim();
+
+    // Return unchanged if it is already a full URL
+    if (val.startsWith('http://') || val.startsWith('https://')) {
+        return val;
+    }
+
+    // Remove leading @ if present
+    const username = val.replace(/^@/, '');
+
+    // Build URLs for usernames
+    switch (platform.toLowerCase()) {
+        case 'facebook':
+            return `https://facebook.com/${username}`;
+        case 'instagram':
+            return `https://instagram.com/${username}`;
+        case 'tiktok':
+            return `https://tiktok.com/@${username}`;
+        default:
+            return val;
+    }
+}
+
 async function fetchProfile() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -28,9 +54,9 @@ async function fetchProfile() {
 
             setupBtn('link-phone', f['Phone Number'] ? `tel:${f['Phone Number']}` : null);
             setupBtn('link-whatsapp', f['WhatsApp Number'] ? `https://wa.me/${f['WhatsApp Number']}?text=Hello%20I%20found%20your%20profile%20on%20ELEO%20and%20would%20like%20to%20make%20an%20inquiry.` : null);
-            setupBtn('link-facebook', f['Facebook']);
-            setupBtn('link-instagram', f['Instagram']);
-            setupBtn('link-tiktok', f['TikTok']);
+            setupBtn('link-facebook', formatSocialLink('facebook', f['Facebook']));
+            setupBtn('link-instagram', formatSocialLink('instagram', f['Instagram']));
+            setupBtn('link-tiktok', formatSocialLink('tiktok', f['TikTok']));
 
             const gallery = document.getElementById('portfolio-target');
             if (gallery && f['Portfolio']) {
