@@ -15,6 +15,10 @@ async function fetchCreators() {
         
         if (data.records) {
             allCreators = data.records; // Your backend now filters for 'Approved' automatically
+            
+            // Sort creators by registration date (oldest first)
+            allCreators.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
+
             renderCreators(allCreators); 
         }
     } catch (e) {
@@ -94,5 +98,3 @@ document.getElementById('see-more-btn').addEventListener('click', () => {
 });
 
 document.addEventListener("DOMContentLoaded", fetchCreators);
-
-
