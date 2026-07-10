@@ -6,26 +6,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("adminPassword");
     const errorMsg = document.getElementById("errorMsg");
 
-    // Master operational password (Change this whenever you want)
-    const MASTER_TOKEN = "Omaadanawo"; 
-
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Halt default browser submit actions
+    loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
         const inputVal = passwordInput.value.trim();
 
-        if (inputVal === MASTER_TOKEN) {
-            // Set session authorization token marker
-            sessionStorage.setItem("eleoAdminAuthenticated", "true");
-            
-            // Clean interface states and proceed smoothly
-            errorMsg.style.display = "none";
-            window.location.href = "admin.html";
-        } else {
-            // Access denied visual treatment
+        try {
+            const response = await fetch("/.netlify/functions/admin-login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    password: inputVal
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                sessionStorage.setItem("eleoAdminAuthenticated", "true");
+                errorMsg.style.display = "none";
+                window.location.href = "admin.html";
+            } else {
+                errorMsg.style.display = "block";
+                passwordInput.value = "";
+                passwordInput.focus();
+            }
+
+        } catch (err) {
+            console.error(err);
             errorMsg.style.display = "block";
-            passwordInput.value = ""; // Empty string clearing safety
-            passwordInput.focus();     // Force focus back for quick corrections
         }
     });
 });
