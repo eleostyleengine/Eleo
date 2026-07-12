@@ -1,5 +1,3 @@
-# Eleo
-
 # ELEO – Fashion Discovery Platform
 
 ELEO is a web platform that helps users discover outfit inspiration and connect with verified fashion professionals across Nigeria.
