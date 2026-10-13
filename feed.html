@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#121212">
+  <title>Feed | Eleo</title>
+  <meta name="description" content="Discover tailors, designers and fashion creators and the work they are making right now.">
+  <link rel="stylesheet" href="social/social.css">
+</head>
+<body class="social">
+  <a class="skip-link" href="#main">Skip to feed</a>
+  <header id="app-header" class="topbar"></header>
+
+  <main id="main" class="page feed-layout">
+    <aside class="feed-side" aria-label="Filter by category">
+      <h2 class="side-title">Categories</h2>
+      <div id="cat-filter" class="cat-filter"></div>
+    </aside>
+
+    <section class="feed-col" aria-label="Fashion feed">
+      <div id="feed-intro"></div>
+      <div id="feed-tabs" class="tabs" role="group" aria-label="Feed view"></div>
+      <div id="feed-list" class="feed-list" aria-live="polite" aria-busy="false"></div>
+      <div id="feed-status"></div>
+      <div id="feed-sentinel" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <div id="app-tabs"></div>
+  <noscript><p class="noscript">Eleo needs JavaScript enabled to show the feed.</p></noscript>
+  <script type="module" src="social/pages/feed.js"></script>
+</body>
+</html>

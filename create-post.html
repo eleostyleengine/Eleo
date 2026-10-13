@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#121212">
+  <title>Create post | Eleo</title>
+  <link rel="stylesheet" href="social/social.css">
+</head>
+<body class="social">
+  <a class="skip-link" href="#main">Skip to form</a>
+  <header id="app-header" class="topbar"></header>
+
+  <main id="main" class="page narrow">
+    <h1 class="page-title">Create a post</h1>
+    <p id="form-loading" class="muted">Loading...</p>
+
+    <form id="post-form" class="stack" novalidate hidden>
+      <p id="form-error" class="form-error" role="alert" tabindex="-1" hidden></p>
+
+      <div class="field">
+        <span class="label" id="image-label">Photo</span>
+        <label id="dropzone" class="dropzone" tabindex="0" for="image" aria-labelledby="image-label" aria-describedby="image-err">
+          <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 8.5h.01"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="dropzone-title">Choose a photo or drag it here</span>
+          <span class="hint">JPG, PNG or WebP. Photos are resized for you.</span>
+        </label>
+        <input id="image" class="sr-only" type="file" accept="image/jpeg,image/png,image/webp" tabindex="-1">
+        <div id="preview" class="preview" hidden></div>
+        <p id="image-err" class="field-error" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label class="label" for="caption">Caption</label>
+        <textarea id="caption" class="input" rows="4" maxlength="2200" required aria-describedby="caption-count caption-err" placeholder="Tell people about the piece: fabric, fit, occasion, how it was made."></textarea>
+        <p id="caption-count" class="hint right">0 / 2200</p>
+        <p id="caption-err" class="field-error" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label class="label" for="category">Category</label>
+        <select id="category" class="input" required aria-describedby="category-err">
+          <option value="">Choose a category</option>
+        </select>
+        <p id="category-err" class="field-error" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label class="label" for="location">Location <span class="optional">(optional)</span></label>
+        <input id="location" class="input" type="text" maxlength="80" autocomplete="off" placeholder="Lagos, Abuja, Ibadan..." aria-describedby="location-err">
+        <p id="location-err" class="field-error" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label class="label" for="tag-input">Tags <span class="optional">(optional, up to 10)</span></label>
+        <ul id="tag-list" class="chip-list" aria-label="Added tags"></ul>
+        <input id="tag-input" class="input" type="text" autocomplete="off" enterkeyhint="done" placeholder="agbada, asooke (press Enter or comma to add)" aria-describedby="tag-input-err">
+        <p id="tag-input-err" class="field-error" role="alert" hidden></p>
+      </div>
+
+      <div class="form-actions">
+        <button id="cancel" type="button" class="btn btn-ghost">Cancel</button>
+        <button id="publish" type="submit" class="btn btn-gold">Publish</button>
+      </div>
+    </form>
+  </main>
+
+  <div id="app-tabs"></div>
+  <script type="module" src="social/pages/create-post.js"></script>
+</body>
+</html>
