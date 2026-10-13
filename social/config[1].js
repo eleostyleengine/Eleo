@@ -1,4 +1,4 @@
-// Eleo Social: configuration
+y// Eleo Social: configuration
 // Paste the two values from Supabase -> Project Settings -> API.
 //   SUPABASE_URL      = "Project URL"
 //   SUPABASE_ANON_KEY = "anon public" key (or "publishable" key on newer projects)
