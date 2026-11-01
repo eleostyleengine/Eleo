@@ -33,7 +33,7 @@ export async function renderShell(active) {
     : h('a', { class: 'btn btn-ghost btn-sm', href: signInHref }, 'Sign in');
 
   headerHost.replaceChildren(
-    !isConfigured && h('div', { class: 'config-banner', role: 'alert' },
+    isConfigured ? '' : h('div', { class: 'config-banner', role: 'alert' },
       'Supabase is not configured yet. Add your Project URL and anon key to social/config.js.'),
     h('div', { class: 'topbar-inner' },
       h('a', { class: 'brand', href: 'index.html', 'aria-label': 'Eleo home' }, 'ELEO'),
