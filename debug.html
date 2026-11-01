@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eleo check</title>
+<style>
+  body{font-family:system-ui,sans-serif;background:#121212;color:#F3F0E8;margin:0;padding:16px;line-height:1.5}
+  h1{color:#D4AF37;font-size:1.3rem;margin:0 0 4px}
+  p{color:#ABA69C;margin:4px 0 14px}
+  .row{border-bottom:1px solid #333;padding:8px 0;word-break:break-word}
+  .ok{color:#4CAF50;font-weight:700}.bad{color:#E5675C;font-weight:700}.warn{color:#D4AF37;font-weight:700}
+  small{display:block;color:#ABA69C}
+</style>
+</head>
+<body>
+<h1>Eleo social check</h1>
+<p>This page tests each file and the database. Send a screenshot of it.</p>
+<div id="out"></div>
+<script type="module">
+const out = document.getElementById('out');
+function row(label, status, cls, detail) {
+  const d = document.createElement('div'); d.className = 'row';
+  const s = document.createElement('span'); s.className = cls; s.textContent = status + '  ';
+  d.append(s, document.createTextNode(label));
+  if (detail) { const sm = document.createElement('small'); sm.textContent = detail; d.append(sm); }
+  out.append(d);
+}
+
+const files = [
+  'social/config.js','social/supabase.js','social/routes.js','social/ui.js','social/social.css',
+  'social/api/storage.js','social/api/posts.js','social/api/interactions.js',
+  'social/components/shell.js','social/components/post-card.js',
+  'social/pages/feed.js','social/pages/auth.js','social/pages/create-post.js','social/pages/post.js',
+  'feed.html','auth.html','create-post.html','post.html'
+];
+
+// 1. Does each file exist, and is it the right kind of file?
+for (const f of files) {
+  try {
+    const r = await fetch(f, { cache: 'no-store' });
+    const type = r.headers.get('content-type') || '';
+    const text = await r.text();
+    if (!r.ok) row(f, 'MISSING', 'bad', 'Server said ' + r.status);
+    else if (f.endsWith('.js') && /text\/html/.test(type)) row(f, 'WRONG PLACE', 'bad', 'The server sent a web page instead of code. The file is not at this path.');
+    else if (f === 'social/config.js' && !/^\s*\/\//.test(text)) row(f, 'BAD START', 'bad', 'First characters: ' + JSON.stringify(text.slice(0, 12)) + '. The file must start with //');
+    else row(f, 'found', 'ok');
+  } catch (e) { row(f, 'ERROR', 'bad', String(e)); }
+}
+
+// 2. Does each script load without errors?
+const mods = ['config','routes','supabase','ui','api/storage','api/posts','api/interactions','components/shell','components/post-card'];
+for (const m of mods) {
+  const path = './social/' + m + '.js';
+  try { await import(path); row(path, 'loads', 'ok'); }
+  catch (e) { row(path, 'FAILS', 'bad', (e && e.message) ? e.message : String(e)); }
+}
+
+// 3. Config sanity (key is never shown)
+try {
+  const c = await import('./social/config.js');
+  const url = c.SUPABASE_URL || '';
+  if (/https:\/\/https:\/\//.test(url)) row('Supabase address', 'WRONG', 'bad', 'It has https:// twice.');
+  else if (/YOUR-PROJECT/.test(url)) row('Supabase address', 'NOT SET', 'bad', 'Still the placeholder.');
+  else if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(url)) row('Supabase address', 'CHECK', 'warn', 'Expected https://xxxx.supabase.co. Found: ' + url);
+  else row('Supabase address', 'looks right', 'ok', url);
+  const k = c.SUPABASE_ANON_KEY || '';
+  if (/YOUR-ANON/.test(k) || k.length < 100) row('Supabase key', 'NOT SET', 'bad', 'Missing or too short.');
+  else row('Supabase key', 'present (' + k.length + ' characters)', 'ok');
+} catch (e) { row('Config', 'FAILS', 'bad', String(e)); }
+
+// 4. Can the page reach the database?
+try {
+  const { supabase } = await import('./social/supabase.js');
+  const cats = await supabase.from('fashion_categories').select('id', { count: 'exact', head: true });
+  if (cats.error) row('Database: categories', 'ERROR', 'bad', cats.error.message);
+  else row('Database: categories', 'reachable (' + cats.count + ' found, expect 12)', cats.count === 12 ? 'ok' : 'warn');
+  const feed = await supabase.rpc('feed_posts', { p_limit: 3 });
+  if (feed.error) row('Database: feed', 'ERROR', 'bad', feed.error.message);
+  else row('Database: feed', 'works (' + feed.data.length + ' posts returned, expect 3)', feed.data.length === 3 ? 'ok' : 'warn');
+} catch (e) { row('Database', 'FAILS', 'bad', (e && e.message) ? e.message : String(e)); }
+
+row('Finished', 'done', 'ok');
+</script>
+</body>
+</html>
