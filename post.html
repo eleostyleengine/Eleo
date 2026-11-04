@@ -6,15 +6,18 @@
   <meta name="theme-color" content="#121212">
   <title>Post | Eleo</title>
   <link rel="stylesheet" href="social/social.css">
+    <link rel="stylesheet" href="site-nav.css">
 </head>
 <body class="social">
   <a class="skip-link" href="#main">Skip to post</a>
-  <header id="app-header" class="topbar"></header>
+  <div id="site-nav" data-active="community"><noscript><div style="background:#0a0a0a;border-bottom:1px solid #333;padding:16px 20px;font-family:'Segoe UI',sans-serif"><a href="index.html" style="color:#D4AF37;font-weight:700;letter-spacing:2px;text-decoration:none;margin-right:18px">ELEO</a><a href="directories.html" style="color:#fff;margin-right:14px">Find Creators</a><a href="feed.html" style="color:#fff;margin-right:14px">Community</a><a href="abouteleo.html" style="color:#fff;margin-right:14px">About</a><a href="faq.html" style="color:#fff;margin-right:14px">FAQ</a><a href="join.html" style="color:#D4AF37">Join as a creator</a></div></noscript></div>
+  <div id="app-header"></div>
   <main id="main" class="page narrow">
     <a class="back-link" href="feed.html">Back to the feed</a>
     <div id="post-host" aria-live="polite"><p class="muted">Loading...</p></div>
   </main>
   <div id="app-tabs"></div>
   <script type="module" src="social/pages/post.js"></script>
+    <script src="site-nav.js" defer></script>
 </body>
 </html>

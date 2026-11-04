@@ -7,10 +7,12 @@
   <title>Feed | Eleo</title>
   <meta name="description" content="Discover tailors, designers and fashion creators and the work they are making right now.">
   <link rel="stylesheet" href="social/social.css">
+    <link rel="stylesheet" href="site-nav.css">
 </head>
 <body class="social">
   <a class="skip-link" href="#main">Skip to feed</a>
-  <header id="app-header" class="topbar"></header>
+  <div id="site-nav" data-active="community"><noscript><div style="background:#0a0a0a;border-bottom:1px solid #333;padding:16px 20px;font-family:'Segoe UI',sans-serif"><a href="index.html" style="color:#D4AF37;font-weight:700;letter-spacing:2px;text-decoration:none;margin-right:18px">ELEO</a><a href="directories.html" style="color:#fff;margin-right:14px">Find Creators</a><a href="feed.html" style="color:#fff;margin-right:14px">Community</a><a href="abouteleo.html" style="color:#fff;margin-right:14px">About</a><a href="faq.html" style="color:#fff;margin-right:14px">FAQ</a><a href="join.html" style="color:#D4AF37">Join as a creator</a></div></noscript></div>
+  <div id="app-header"></div>
 
   <main id="main" class="page feed-layout">
     <aside class="feed-side" aria-label="Filter by category">
@@ -30,5 +32,6 @@
   <div id="app-tabs"></div>
   <noscript><p class="noscript">Eleo needs JavaScript enabled to show the feed.</p></noscript>
   <script type="module" src="social/pages/feed.js"></script>
+    <script src="site-nav.js" defer></script>
 </body>
 </html>

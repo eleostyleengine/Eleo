@@ -1,0 +1,59 @@
+/* =============================================================================
+   ELEO SITE NAV  |  site-nav.css
+   One menu for the whole site. Scoped under .sn so it cannot clash with the
+   existing page styles. Uses Eleo's own tokens when a page defines them.
+   ============================================================================= */
+.sn {
+  --sn-gold: var(--primary-gold, #D4AF37);
+  --sn-line: var(--border-color, #333333);
+  --sn-bar: #0a0a0a;
+  --sn-text: #FFFFFF;
+  --sn-muted: #CCCCCC;
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10, 10, 10, 0.93);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--sn-line);
+  padding-top: env(safe-area-inset-top, 0px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px; line-height: 1.5; text-align: left;
+}
+.sn, .sn * { box-sizing: border-box; }
+.sn a { text-decoration: none; }
+.sn [hidden] { display: none !important; }
+.sn :focus-visible { outline: 2px solid var(--sn-gold); outline-offset: 3px; border-radius: 4px; }
+
+.sn-bar { max-width: 1120px; margin: 0 auto; padding: 0 20px; height: 64px; display: flex; align-items: center; gap: 32px; }
+.sn-logo { color: var(--sn-gold); font-size: 1.6rem; font-weight: 700; letter-spacing: 3px; margin: 0; }
+.sn-links { display: none; gap: 6px; margin: 0 auto 0 0; }
+.sn-links a { position: relative; padding: 8px 14px; margin: 0; color: var(--sn-muted); border-radius: 6px; transition: color 0.2s; }
+.sn-links a:hover { color: var(--sn-text); }
+.sn-links a[aria-current="page"] { color: var(--sn-text); }
+.sn-links a[aria-current="page"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; background: var(--sn-gold); }
+.sn-actions { display: none; align-items: center; gap: 18px; }
+.sn-signin { color: var(--sn-muted); margin: 0; }
+.sn-signin:hover { color: var(--sn-text); }
+.sn-cta { display: inline-block; background: var(--sn-gold); color: #121212; font-weight: 600; padding: 9px 20px; margin: 0; border-radius: 999px; transition: filter 0.2s; }
+.sn-cta:hover { filter: brightness(1.1); }
+.sn-cta[aria-current="page"] { box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4); }
+
+.sn-toggle { margin: 0 0 0 auto; background: none; border: 1px solid var(--sn-line); color: var(--sn-text); width: 44px; height: 44px; padding: 0; border-radius: 10px; display: grid; place-items: center; cursor: pointer; }
+.sn-toggle:hover { border-color: var(--sn-gold); }
+.sn-toggle .sn-x { display: none; }
+.sn-toggle[aria-expanded="true"] .sn-bars { display: none; }
+.sn-toggle[aria-expanded="true"] .sn-x { display: block; }
+
+.sn-panel { border-top: 1px solid var(--sn-line); background: var(--sn-bar); padding: 6px 20px 22px; max-height: calc(100vh - 64px); max-height: calc(100dvh - 64px); overflow-y: auto; }
+.sn-panel a.sn-item { display: block; padding: 16px 0 16px 14px; margin: 0; border-bottom: 1px solid var(--sn-line); border-left: 2px solid transparent; color: var(--sn-text); }
+.sn-panel a.sn-item strong { display: block; font-size: 1.1rem; font-weight: 600; }
+.sn-panel a.sn-item span { display: block; color: #a6a6a6; font-size: 0.88rem; }
+.sn-panel a.sn-item[aria-current="page"] { border-left-color: var(--sn-gold); }
+.sn-panel a.sn-item[aria-current="page"] strong { color: var(--sn-gold); }
+.sn-panel .sn-row { display: grid; gap: 12px; margin-top: 20px; }
+.sn-panel .sn-cta { text-align: center; padding: 14px; }
+.sn-panel .sn-ghost { text-align: center; padding: 13px; border: 1px solid var(--sn-line); border-radius: 999px; color: var(--sn-text); }
+
+@media (min-width: 900px) {
+  .sn-links, .sn-actions { display: flex; }
+  .sn-toggle, .sn-panel { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .sn * { transition: none !important; } }

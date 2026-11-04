@@ -56,5 +56,10 @@
   <lastmod>2026-07-02T11:43:17+00:00</lastmod>
   <priority>0.64</priority>
 </url>
+<url>
+  <loc>https://eleostyleengine.netlify.app/feed</loc>
+  <lastmod>2026-11-01T09:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
 
 </urlset>

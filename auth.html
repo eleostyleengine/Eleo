@@ -6,13 +6,15 @@
   <meta name="theme-color" content="#121212">
   <title>Sign in or join | Eleo</title>
   <link rel="stylesheet" href="social/social.css">
+    <link rel="stylesheet" href="site-nav.css">
 </head>
 <body class="social">
   <a class="skip-link" href="#main">Skip to form</a>
-  <header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html" aria-label="Eleo home">ELEO</a></div></header>
+  <div id="site-nav" data-active=""><noscript><div style="background:#0a0a0a;border-bottom:1px solid #333;padding:16px 20px;font-family:'Segoe UI',sans-serif"><a href="index.html" style="color:#D4AF37;font-weight:700;letter-spacing:2px;text-decoration:none;margin-right:18px">ELEO</a><a href="directories.html" style="color:#fff;margin-right:14px">Find Creators</a><a href="feed.html" style="color:#fff;margin-right:14px">Community</a><a href="abouteleo.html" style="color:#fff;margin-right:14px">About</a><a href="faq.html" style="color:#fff;margin-right:14px">FAQ</a><a href="join.html" style="color:#D4AF37">Join as a creator</a></div></noscript></div>
   <main id="main" class="page auth-page">
     <div id="auth-root" class="auth-card"><p class="muted">Loading...</p></div>
   </main>
   <script type="module" src="social/pages/auth.js"></script>
+    <script src="site-nav.js" defer></script>
 </body>
 </html>
