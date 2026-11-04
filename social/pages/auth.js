@@ -163,6 +163,11 @@ function render() {
   }
   supabase.auth.onAuthStateChange((event) => { if (event === 'PASSWORD_RECOVERY') recoveryForm(); });
   if (location.hash.includes('type=recovery')) return;   // recovery handler will render
+    if (params.get('signout')) {
+    await supabase.auth.signOut();
+    location.replace(new URL('feed.html', location.href).href);
+    return;
+  }
   if (await getUser()) { location.replace(nextUrl()); return; }
   render();
 })();
